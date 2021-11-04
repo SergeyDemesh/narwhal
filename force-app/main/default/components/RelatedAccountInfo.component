@@ -1,2 +1,22 @@
-<apex:component id="RelatedAccountInfo">
+<apex:component id="RelatedAccountInfo" controller="RelatedAccountInfoController">
+    <apex:attribute name="ContactId" type="Id" description="Contact Id" assignTo="{!currentContactId}"/>
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Account Information" columns="1" collapsible="false">
+            <apex:outputField value="{!RelatedAccount.Account.Name}"/>
+
+            <apex:outputField value="{!RelatedAccount.Account.AccountNumber}"/>
+
+            <apex:outputField value="{!RelatedAccount.Account.Phone}"/>
+            <apex:pageBlockSection collapsible="false" title="Billing Address" columns="1">
+
+                <apex:outputField value="{!relatedAccount.Account.BillingStreet}"/>
+                <apex:outputField value="{!relatedAccount.Account.BillingCity}"/>
+                <apex:outputField value="{!relatedAccount.Account.BillingCountry}"/>
+
+            </apex:pageBlockSection>
+
+            <apex:outputField value="{!RelatedAccount.Account.Type}"/>
+
+        </apex:pageBlockSection>
+    </apex:pageBlock>
 </apex:component>
