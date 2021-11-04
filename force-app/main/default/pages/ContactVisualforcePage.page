@@ -1,0 +1,6 @@
+<apex:page standardController="Contact" extensions="ContactVisualforceController">
+    <apex:outputField value="{!Contact.Name}"/>
+    <apex:form >
+        <apex:commandButton value="View all" action="{!viewAll}"/>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,12 @@
+<apex:page id="TemplateWithTwoRegions" standardController="Contact">
+    <apex:slds />
+    <div class="slds-grid">
+        <div class="slds-col slds-box slds-size_1-of-4">
+            <apex:insert name="leftSidebar"/>
+        </div>
+
+        <div class="slds-col slds-box slds-size_3-of-4">
+            <apex:insert name="contentArea"/>
+        </div>
+    </div>
+</apex:page>

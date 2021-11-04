@@ -1,0 +1,12 @@
+<apex:page id="ContactDescriptionPageWithTemplate" standardController="Contact">
+    <apex:messages />
+    <apex:composition template="TemplateWithTwoRegions">
+        <apex:define name="leftSidebar">
+
+        </apex:define>
+
+        <apex:define name="contentArea">
+            <apex:detail subject="{!"0035j0000087KtpAAE"}" />
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,12 @@
+.container {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 250px;
+    height: 36px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 15px;
+}

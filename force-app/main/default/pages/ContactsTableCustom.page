@@ -1,0 +1,9 @@
+<apex:page id="ContactsTableCustom" controller="ContactVFPageCustomController">
+    <apex:pageBlock title="Contacts Table">
+        <apex:pageBlockTable value="{!Contacts}" var="contact">
+            <apex:column value="{!contact.Name}"/>
+            <apex:column value="{!contact.Email}"/>
+            <apex:column value="{!contact.Phone}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
