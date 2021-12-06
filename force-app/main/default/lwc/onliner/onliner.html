@@ -1,0 +1,204 @@
+<template>
+    <div class="container slds-size_1-of-1 slds-grid slds-grid_align-center">
+        <div class="wrapper">
+            <div class="header slds-size_1-of-1">
+                <div class="slds-grid slds-grid_align-space">
+                    <!--                    <div class="slds-col slds-align-middle slds-size_1-of-12">-->
+                    <img class="logo slds-col slds-align-middle slds-size_1-of-12" src="https://gc.onliner.by/images/logo/onliner_logo.v3@2x.png?token=1622018420" alt="Onliner">
+                    <!--                    </div>-->
+                    <div class="search-input slds-col slds-align-middle slds-size_5-of-12 ">
+                        <lightning-input
+                                name="enter-search"
+                                placeholder="Поиск в каталоге ..."
+                                type="text"
+                                class="search-lightning-input">
+                        </lightning-input>
+                        <lightning-button-icon icon-name="utility:search"    alternative-text="Delete"   class="search-button" title="Delete"></lightning-button-icon>
+                    </div>
+
+                    <div class="login-button-group slds-col slds-align-middle slds-size_2-of-12">
+                        <lightning-button-group class="button-group">
+                            <lightning-button label="Вход"></lightning-button>
+                            <lightning-button-icon icon-name="utility:settings"  alternative-text="Settings" class="additional-login-btn" title="Settings"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:adduser"   alternative-text="Add user" class="additional-login-btn" title="Add user"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:delete"    alternative-text="Delete"   class="additional-login-btn" title="Delete"></lightning-button-icon>
+                        </lightning-button-group>
+
+                        <lightning-icon class="login-button" icon-name="utility:adduser" alternative-text="Login" title="Login">Войти</lightning-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs slds-size_1-of-1">
+                <div class="slds-grid slds-grid_align-space slds-scrollable">
+                <ul class="slds-list_horizontal slds-grid slds-grid_align-space">
+                    <li class="slds-col"><a>Мобильные телефоны</a></li>
+                    <li class="slds-col"><a>Ноутбуки</a></li>
+                    <li class="slds-col"><a>Автомобильные шины</a></li>
+                    <li class="slds-col"><a>Велосипеды</a></li>
+                    <li class="slds-col"><a>Планшеты</a></li>
+                    <li class="slds-col"><a>Наушники и гарнитуры</a></li>
+                    <li class="slds-col"><a>Детские коляски</a></li>
+                    <li class="slds-col"><a>Видеокарты</a></li>
+                    <li class="slds-col"><a>Моторные масла</a></li>
+                    <li class="slds-col"><a>Фотоаппараты</a></li>
+                    <li class="slds-col"><a>Умные часы и браслеты</a></li>
+                    <li class="slds-col"><a>Набор инструментов</a></li>
+                    <li class="slds-col"><a>Запчасти</a></li>
+                    <li class="slds-col"><a>Автоакустика</a></li>
+                    <li class="slds-col"><a>Мототехника</a></li>
+                    <li class="slds-col"><a>Шины и диски</a></li>
+                    <li class="slds-col"><a>Электротранспорт</a></li>
+                    <li class="slds-col"><a>Хобби</a></li>
+                    <li class="slds-col"><a>Туризм и кемпинг</a></li>
+                </ul>
+                </div>
+            </div>
+
+            <div class="content slds-grid slds-size_1-of-1">
+
+                <!--                Column 1-->
+                <div class="column slds-col slds-size_1-of-4">
+                    <div class="post slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column slds-col slds-size_1-of-4 slds-grid_vertical">
+                    <div class="post bg2 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg2 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg2 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column slds-col slds-size_1-of-4 slds-grid_vertical">
+                    <div class="post bg3 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg3 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg3 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column slds-col slds-size_1-of-4 slds-grid_vertical">
+                    <div class="post bg4 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg4 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg4 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="top-info slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Люди</span>
+                                <span class="comments slds-p-horizontal_x-small slds-m-right_small slds-col_bump-left">425</span>
+                            </div>
+                            <div class="bottom-info slds-grid slds-grid_vertical-align-end">
+                                <h3 class="post-title slds-m-left_x-small">Магия</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

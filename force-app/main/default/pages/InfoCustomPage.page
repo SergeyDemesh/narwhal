@@ -1,0 +1,40 @@
+<apex:page id="InfoCustomPage" controller="ObjectInfoController">
+    <apex:slds/>
+    <div class="slds-grid_align-center">
+        <apex:messages />
+        <div class="slds-col slds-size_1-of-5">
+            <apex:form >
+                <apex:inputText     value="{!objectName}"   styleClass="slds-input"/>
+                <apex:commandButton value="Get Info"        styleClass="slds-button_outline-brand" action="{!getObjectInfo}"/>
+            </apex:form>
+        </div><br/>
+
+        <div class="slds-col slds-size_1-of-3">
+            <apex:form>
+                <apex:pageBlock>
+                    <apex:pageBlockSection title="Object Permissions" collapsible="false">
+
+                        <apex:outputText  value="Read"/>    <apex:inputCheckbox disabled="true" value="{!canRead}"/>
+                        <apex:outputText  value="Create"/>  <apex:inputCheckbox disabled="true" value="{!canCreate}"/>
+                        <apex:outputText  value="Edit"/>    <apex:inputCheckbox disabled="true" value="{!canEdit}"/>
+                        <apex:outputText  value="Delete"/>  <apex:inputCheckbox disabled="true" value="{!canDelete}"/>
+
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:form>
+        </div><br/>
+
+        <div class="slds-col slds-size_1-of-3">
+
+            <apex:form>
+                <apex:pageBlock title="Field Permissions">
+                    <apex:pageBlockTable value="{!fields}" var="field">
+                        <apex:column headerValue="Field Name"   value="{!field.Name}"/>
+                        <apex:column headerValue="Read Access"><apex:inputCheckbox value="{!field.Read}" disabled="true"/></apex:column>
+                        <apex:column headerValue="Edit Access"><apex:inputCheckbox value="{!field.Edit}" disabled="true"/></apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:form>
+        </div>
+    </div>
+</apex:page>

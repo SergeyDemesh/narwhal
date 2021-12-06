@@ -1,0 +1,14 @@
+<apex:page id="CarNumberGenerator" controller="CarNumberGeneratorController">
+    <apex:slds />
+    <div class="slds-grid slds-wrap slds-gutters_medium">
+        <div class="slds-col slds-size_1-of-3">
+            <apex:form>
+                <apex:commandButton styleClass="slds-button_outline-brand" action="{!generateNumber}" value="Generate"> </apex:commandButton>
+                <apex:commandButton styleClass="slds-button_outline-brand" action="{!saveNumber}" value="Save"> </apex:commandButton><br/>
+
+                <apex:outputText id="number" value="{!carNumber}"> </apex:outputText>
+            </apex:form>
+        </div>
+
+    </div>
+</apex:page>

@@ -1,0 +1,157 @@
+<apex:page id="ActionVSPage" controller="ActionVSPageController">
+    <apex:slds/>
+        <apex:pageBlock id="main-block">
+
+            <div class="slds-col slds-size_1-of-12">
+                <apex:form>
+                    <apex:inputCheckbox value="{!showOne}" onClick="toggle('1')" /><span>One</span><br/>
+                    <apex:inputCheckbox value="{!showTwo}" onClick="toggle('2')" /><span>Two</span><br/>
+                    <apex:inputCheckbox value="{!showThree}" onClick="toggle('3')" /><span>Three</span><br/>
+                </apex:form>
+            </div>
+
+                <div id="one">
+                    <apex:pageBlock rendered="{!showOne}">
+                        <apex:form >
+                            <apex:actionFunction name="setMessageToBack"
+                                                 action="{!printMessageBack}"
+                                                 reRender="out">
+                                <apex:param value="" name="message"/>
+                            </apex:actionFunction>
+                        </apex:form>
+
+                        <button value="First Button"    class="slds-button_outline-brand" onClick="setMessage(this.value)">First Button</button>
+                        <button value="Second Button"   class="slds-button_outline-brand" onClick="setMessage(this.value)">Second Button</button>
+                        <button value="Third Button"    class="slds-button_outline-brand" onClick="setMessage(this.value)">Third Button</button><br/>
+
+                        <apex:outputPanel id="out">
+                            {!messageBack}
+                        </apex:outputPanel>
+                    </apex:pageBlock>
+                </div>
+
+                <div id="two" class="slds-text-align_center">
+                    <apex:pageBlock rendered="{!showTwo}">
+                        <input id="objectSearch" type="text" />
+                        <button onclick="getObject()">Get Object</button><br/>
+
+                        <table align="center" border="2">
+                            <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Name</td>
+                                <td>Created Date</td>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                    </apex:pageBlock>
+                </div>
+
+                <div id="three" class="slds-text-align_right">
+                    <apex:pageBlock rendered="{!showThree}">
+                        <apex:form>
+                            <div>
+                                <apex:inputText value="{!externalParam}"/><br/>
+                                <apex:commandButton action="{!redirectToYouTube}" value="YouTube"/>
+                                <apex:commandButton action="{!redirectToGoogle}" value="Google"/>
+                                <apex:commandButton action="{!redirectToJsDocs}" value="JS Docs"/>
+                            </div>
+                            <div>
+                                <apex:inputText value="{!internalParam}"/><br/>
+                                <apex:commandButton action="{!redirectToContactInfo}" value="Contact Info"/>
+                                <apex:commandButton action="{!redirectToContactInfoCustom}" value="Contact Info Custom"/>
+                                <apex:commandButton action="{!redirectToContactsTable}" value="Contacts Table"/>
+                            </div>
+                        </apex:form>
+                    </apex:pageBlock>
+                </div>
+        <apex:form>
+            <apex:actionFunction action="{!changeShowOne}" name="changeShowOne" reRender="main-block" >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!changeShowTwo}" name="changeShowTwo" reRender="main-block">
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!changeShowThree}" name="changeShowThree" reRender="main-block">
+            </apex:actionFunction>
+        </apex:form>
+        </apex:pageBlock>
+    <script>
+        function setMessage(message) {
+            setMessageToBack(message);
+        }
+
+        function getObject() {
+            let objectName = document.getElementById('objectSearch'). value;
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.ActionVSPageController.getObjectBack}',
+                objectName,
+                function (result, event) {
+                    if (event.status) {
+                        let table = document.getElementById('tbody');
+                        table.innerHTML = '';
+                        result.forEach((item) => {
+                            createRow(table, item.Id, item.Name, new Date(item.CreatedDate).toLocaleString(undefined, options));
+                        });
+                    }
+                },
+                {escape: true}
+            );
+        }
+
+        function createRow(table, id, name, date) {
+
+            let row = table.insertRow(0);
+
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+
+            cell1.innerHTML = id;
+            cell2.innerHTML = name;
+            cell3.innerHTML = date;
+
+        }
+
+        function toggle(block) {
+            switch (block) {
+                case '1':
+                    let blockOne = document.getElementById('one');
+                    if(blockOne.getAttribute('hidden') !== "true") {
+                        blockOne.setAttribute('hidden', "true");
+
+                    } else {
+                        blockOne.removeAttribute('hidden');
+                    }
+                    // changeShowOne();
+                    break;
+                case '2':
+                    let blockTwo = document.getElementById('two');
+                    if(blockTwo.getAttribute('hidden') !== "true") {
+                        blockTwo.setAttribute('hidden', "true");
+                    } else {
+                        blockTwo.removeAttribute('hidden');
+                    }
+                    // changeShowTwo();
+                    break;
+                case '3':
+                    let blockThree = document.getElementById('three');
+                    if(blockThree.getAttribute('hidden') !== "true") {
+                        blockThree.setAttribute('hidden', "true");
+                    } else {
+                        blockThree.removeAttribute('hidden');
+                    }
+                    // changeShowThree();
+                    break;
+            }
+        }
+
+
+
+    </script>
+
+</apex:page>

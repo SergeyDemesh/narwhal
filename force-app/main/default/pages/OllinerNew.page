@@ -1,0 +1,670 @@
+<apex:page id="OllinerNew" standardStylesheets="false" sideBar="false" showHeader="false">
+    <apex:slds/>
+    <style>
+        .post {
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 1px solid white;
+        }
+
+        .header {
+            margin-left: 8.33333%;
+            margin-right: 8.33333%;
+            width: 83.3334%;
+        }
+
+        .head {
+            background-color: #FFDD22;
+        }
+        .head ul li {
+            margin-right: 5px;
+            margin-left: 5px;
+            display: inline-block;
+        }
+
+        .header-category {
+            font-family: 'Open Sans',Arial,Helvetica,Verdana,sans-serif;
+            color: #000000 !important;
+            line-height: 40px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .sections {
+            overflow: auto;
+            background-color: #f4f4f4;
+            padding-top: 10px;
+            margin-top: 5px;
+        }
+
+
+        .sections ul{
+            height: 35px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1715px) {
+            .sections ul:hover{
+                overflow-x: scroll;
+            }
+        }
+
+        .sections ul li {
+            margin-right: 5px;
+            margin-left: 5px;
+            display: inline-block;
+        }
+
+        .logo {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .header-category-icon {
+            width: 15px;
+            height: 15px;
+            padding-bottom: 5px;
+        }
+
+        .weather-icon {
+            width: 32px !important;
+            height: 32px;
+            background-image: url("https://gc.onliner.by/images/weather/phenomena-32.png");
+            background-position: -288px 0;
+        }
+        .card-icon {
+            width: 25px !important;
+            height: 20px !important;
+        }
+
+        .navigation-age {
+            height: 22px;
+            width: 30px !important;
+            margin-top: 10px;
+            margin-right: 20px;
+            padding: 4px 3px;
+            background-color: rgba(0,0,0,.05);
+            color: #999;
+            border-radius: 2px;
+            font-size: 14px;
+            line-height: 1;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        .input {
+            width: 60%;
+        }
+
+        .search-input {
+            background-image: url("https://gc.onliner.by/images/i-search.svg");
+            background-size: 18px 18px;
+            background-position: 12px 50%;
+            background-repeat: no-repeat;
+            padding-left: 35px !important;
+        }
+        
+        @media (max-width: 1023px) {
+            .btn {
+                font-size: 18px !important;
+            }
+        }
+        
+        .bottom-info {
+            cursor: pointer;
+            margin-top: 50px;
+            padding: 39px 20px 10px;
+            font-size: 17px;
+            line-height: 1;
+            font-family: 'Open Sans Condensed', Arial,Helvetica,sans-serif;
+            color: #ffffff;
+            text-shadow: 1px 1px 0 rgb(0 0 0 / 30%);
+            white-space: normal;
+            font-weight: 400;
+        }
+
+        @media (max-width: 1023px) {
+            .bottom-info {
+                line-height: 36px;
+                font-size: 34px;
+                margin-top: 200px;
+            }
+        }
+
+        .category {
+            background-color: #FFD500;
+            text-transform: uppercase;
+            line-height: 9px;
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+
+        #menuToggle
+        {
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0;
+
+            z-index: 1;
+
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        #menuToggle a
+        {
+            text-decoration: none;
+            color: #232323;
+
+            transition: color 0.3s ease;
+        }
+
+        #menuToggle a:hover
+        {
+            color: #FFD500;
+        }
+
+
+        #menuToggle input
+        {
+            display: block;
+            width: 50px;
+            height: 40px;
+            position: absolute;
+            top: -9px;
+            left: -5px;
+
+            cursor: pointer;
+
+            opacity: 0;
+            z-index: 2;
+
+            -webkit-touch-callout: none;
+        }
+
+        #menuToggle span
+        {
+            display: block;
+            width: 49px;
+            height: 6px;
+            margin-bottom: 8px;
+            position: relative;
+
+            background: #cdcdcd;
+            border-radius: 3px;
+
+            z-index: 1;
+
+            transform-origin: 4px 0px;
+
+            transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            opacity 0.55s ease;
+        }
+
+        #menuToggle span:first-child
+        {
+            transform-origin: 0% 0%;
+        }
+
+        #menuToggle span:nth-last-child(2)
+        {
+            transform-origin: 0% 100%;
+        }
+
+        #menuToggle input:checked ~ span
+        {
+            opacity: 1;
+            transform: rotate(45deg) translate(-2px, -1px);
+            background: #232323;
+        }
+
+        #menuToggle input:checked ~ span:nth-last-child(3)
+        {
+            opacity: 0;
+            transform: rotate(0deg) scale(0.2, 0.2);
+        }
+
+        #menuToggle input:checked ~ span:nth-last-child(2)
+        {
+            transform: rotate(-45deg) translate(0, -1px);
+        }
+
+        #menu
+        {
+            position: absolute;
+            width: 300px;
+            margin: -100px 0 0 -50px;
+            padding: 50px;
+            padding-top: 125px;
+
+            background: #ededed;
+            list-style-type: none;
+            -webkit-font-smoothing: antialiased;
+
+
+            transform-origin: 0% 0%;
+            transform: translate(-57%, -100%);
+
+            transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+        }
+
+        #menu li
+        {
+            padding: 10px 0;
+            font-size: 22px;
+        }
+
+        #menuToggle input:checked ~ ul
+        {
+            transform: translate(-57%, 0);
+        }
+
+
+        .btn-group .button {
+            background-color: #FDFDFD;
+            border: 1px solid #E3E3E3;
+            color: #999BA9;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            float: left;
+        }
+
+
+
+        .btn-group .button:first-child {
+            width: 100px;
+            height: 32px;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .btn-group .button:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .btn-group .button:not(:first-child) {
+            width: 37px;
+            height: 32px;
+        }
+
+        .btn-group .button:hover {
+            border-color: #666666;
+            color: #333333;
+        }
+
+        @media (min-width: 1715px) {
+            .sections {
+                overflow: auto;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .category {
+                line-height: 18px;
+                font-size: 20px;
+            }
+
+            .post {
+                width: 100%;
+                height: 375px;
+            }
+
+            .post-title {
+                font-size: 20px;
+                background-color: rgba(0, 0, 0, 0.39);
+            }
+
+            .sections ul{
+                font-size: 24px;
+                height: 40px;
+            }
+
+        }
+
+        .bg1 {
+            background-image:url(https://content.onliner.by/news/1100x5616/851681fb0ff48238f05baf646a388205.jpeg);
+        }
+        .bg2 {
+            background-image:url(https://content.onliner.by/news/1100x5616/5b7fb834832c9d921a1fb1165996d656.jpeg);
+        }
+        .bg3 {
+            background-image:url(https://content.onliner.by/news/1100x5616/540ce81eb2c248bc63048a51d140d05c.jpeg);
+        }
+        .bg4 {
+            background-image:url(https://content.onliner.by/news/1100x5616/5b7fb834832c9d921a1fb1165996d656.jpeg);
+        }
+
+        .news {
+            padding: 5px
+        }
+
+        .img-news {
+            width: 100%;
+            height: auto;
+        }
+
+        .img-news >* {
+            width: calc(100% - 20px);
+        }
+
+        @media (min-width: 760px) {
+            .news-heading a {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 759px) {
+            .news-heading  a{
+                line-height: 1.2;
+                font-size: 40px;
+                word-break: break-word;
+                word-wrap: break-word;
+                color: #004d99;
+                padding: 10px 10px 10px 0;
+            }
+        }
+
+        .news-content {
+            padding: 10px;
+        }
+
+        .footer {
+            border-radius: 2px;
+            padding: 22px 20px 40px;
+            background-color: #3e4753;
+        }
+
+    </style>
+	<div class="slds-size_1-of-1 slds-grid slds-grid_align-center slds-wrap">
+        <div class="header slds-show_x-large slds-large-size_10-of-12 slds-grid slds-wrap slds-gutters_xxx-small">
+            <div class="head slds-size_7-of-12 slds-grid slds-grid_align-spread">
+                <ul class="slds-list_horizontal slds-grid slds-grid_align-spread">
+                    <li class="header-category slds-col"><img class="header-category-icon" src="https://gc.onliner.by/images/i-fire-orange.png"/><a>Каталог</a></li>
+                    <li class="header-category slds-col"><a>Новости</a></li>
+                    <li class="header-category slds-col"><img class="header-category-icon" src="https://gc.onliner.by/images/i-card.png"/><a>Автобарахолка</a></li>
+                    <li class="header-category slds-col"><a>Дома и квартиры</a></li>
+                    <li class="header-category slds-col"><a>Услуги</a></li>
+                    <li class="header-category slds-col"><a>Барахолка</a></li>
+                    <li class="header-category slds-col"><a>Форум</a></li>
+                </ul>
+            </div>
+            <div class="slds-size_5-of-12 slds-grid">
+                <div class="slds-large-size_4-of-12 slds-col header-category">
+                    <img class="card-icon" src="https://gc.onliner.by/images/i-clover.png"/>
+                    <span>Onliner Клевер</span>
+                </div>
+                <div class="slds-size_2-of-12 slds-col header-category">
+                    <span>$ 3,5543</span>
+                </div>
+                <div class="slds-size_2-of-12 slds-col header-category weather-icon">
+                    <span style="padding-left: 32px">+7</span>
+                </div>
+                <div class="slds-size_1-of-12 slds-col slds-col_bump-left slds-align-middle navigation-age">
+                    18+
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-medium-size_1-of-1 slds-large-size_10-of-12 slds-grid slds-grid_align-center slds-wrap">
+            <div class="slds-card__body slds-col slds-size_1-of-1">
+                <div class="slds-grid slds-grid_align-spread">
+                    <div class="slds-col slds-align-bottom slds-size_4-of-12 slds-large-size_2-of-12">
+                        <img class="logo slds-col slds-align-middle slds-size_1-of-1" src="https://gc.onliner.by/images/logo/onliner_logo.v3.png?token=1635754022" alt="Onliner"/>
+                    </div>
+                    <div class="input slds-col slds-show_large slds-align-bottom slds-large-size_6-of-12">
+                        <input  class="slds-input search-input"
+                                name="enter-search"
+                                placeholder="Поиск в каталоге ..."
+                                type="text"
+                                />
+                    </div>
+
+                    <div class="btn-group slds-col slds-show_large slds-align-bottom slds-size_3-of-12 slds-large-size_3-of-12">
+                        <button class="button slds-col_bump-left slds-large-size_3-of-12">Вход</button>
+                        <button class="button slds-show_large">
+                            <img src="https://gc.onliner.by/images/i-fb-gray-alter.svg" alt="facebook"/>
+                        </button>
+                        <button class="button slds-show_large">
+                            <img src="https://gc.onliner.by/images/i-vk-gray-alter.svg" alt="Vkontakte"/>
+                        </button>
+                        <button class="button slds-show_large">
+                            <img src="https://gc.onliner.by/images/i-gg-gray-alter.svg" alt="Google"/>
+                        </button>
+                    </div>
+                    <div class="slds-hide_large slds-size_1-of-12">
+                        <nav role="navigation">
+                            <div id="menuToggle">
+
+                                <input type="checkbox" />
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                                <ul id="menu">
+                                    <a href="#"><li>Каталог</li></a>
+                                    <a href="#"><li>Новости</li></a>
+                                    <a href="#"><li>Автобарахолка</li></a>
+                                    <a href="#"><li>Дома и квартиры</li></a>
+                                    <a href="#"><li>Услуги</li></a>
+                                    <a href="#"><li>Барахолка</li></a>
+                                    <a href="#"><li>Форум</li></a>
+                                    <a href="#"><li>Вход</li></a>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1">
+                <div class="sections slds-grid slds-grid_align-space slds-align-bottom">
+                    <ul class="slds-list_horizontal slds-grid slds-grid_align-spread">
+                        <li class="slds-col"><a>Телевизоры</a></li>
+                        <li class="slds-col"><a>Автомобильные шины</a></li>
+                        <li class="slds-col"><a>Чистящие и моющие средства</a></li>
+                        <li class="slds-col"><a>Аксессуары для фото и видеокамер</a></li>
+                        <li class="slds-col"><a>Пульсометры, пульсоксиметры</a></li>
+                        <li class="slds-col"><a>Дезодоранты и антиперспиранты</a></li>
+                        <li class="slds-col"><a>Гаджеты для сна</a></li>
+                        <li class="slds-col"><a>Электронные книги</a></li>
+                        <li class="slds-col"><a>Микроволновые печи</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slds-col slds-grid slds-size_1-of-1 slds-wrap">
+
+                <div class="slds-col slds-small-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="post bg1 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg1 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-x-large-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg1 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column slds-col slds-small-size_1-of-2 slds-large-size_1-of-4 slds-grid_vertical">
+                    <div class="post bg2 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg2 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg2 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column slds-col slds-small-size_1-of-2 slds-large-size_1-of-4 slds-grid_vertical">
+                    <div class="post bg3 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg3 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg3 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column slds-col slds-small-size_1-of-2 slds-large-size_1-of-4 slds-grid_vertical">
+                    <div class="post bg4 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg4 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post bg4 slds-col">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-size_1-of-1 slds-m-top_small slds-grid slds-grid_vertical-align-start">
+                                <span class="category slds-p-horizontal_x-small slds-p-vertical_xx-small slds-m-left_small">Кошелёк</span>
+                            </div>
+                            <div class="bottom-info">
+                                <h3 class="post-title slds-m-left_x-small">Что почем в магазинах супернизких цен</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news slds-col slds-grid slds-grid_vertical-align-start slds-size_1-of-1 slds-wrap">
+                <div class="block slds-large-size_5-of-12 slds-medium-size_1-of-1 slds-col slds-m-top_small slds-grid slds-grid_vertical-align-start slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 img-news">
+                        <img src="https://content.onliner.by/news/1400x5616/0df5d36f11400f7a94440ba771196e0a.jpeg"/>
+                    </div>
+                    <div class="news-heading slds-large-size_6-of-12 slds-medium-size_1-of-1 slds-col">
+                        <span><a href="#">Ютубер с трикотажной фабрики. Собрала с песней почти 240 тысяч просмотров и съездила на шоу к Малахову</a></span>
+                    </div>
+                    <div class="news-content slds-show_large slds-size_6-of-12 slds-col">
+                        <p>Жительница Жодино Алена Шестак петь любит с детства. Со временем она превратила музыку в свое главное увлечение. Вместе с коллегами участвовала в самодеятельности, выступала на корпоративах и семейных торжествах, жила в общежитии, нянчила внуков и даже не задумывалась, что ее творчество может быть кому-то интересно. Но в прошлом году Алена стала активно публиковать свои видео в TikTok, YouTube, и они начали собирать десятки тысяч лайков и просмотров.</p>
+                    </div>
+                </div>
+                <div class="block slds-large-size_2-of-12 slds-medium-size_1-of-1 slds-col slds-m-top_small slds-grid slds-grid_vertical-align-start slds-wrap">
+                    <div class="slds-col slds-large-size_1-of-1 slds-medium-size_1-of-3 img-news">
+                        <img src="https://content.onliner.by/news/1400x5616/b17bea70f797a0875088be07e5be6f4b.jpeg"/>
+                    </div>
+                    <div class="news-heading slds-large-size_1-of-1 slds-medium-size_2-of-3 slds-col">
+                        <span><a href="#">Вместо чаевых 17-летняя официантка получила наследство в $500 000</a></span>
+                    </div>
+                    <div class="news-content slds-show_large slds-size_1-of-1 slds-col">
+                        <p>Жена Билла Кракстона умерла от рака в 40-летнем возрасте. Овдовев, Билл ожидаемо столкнулся с одиночеством. Городок Чагрин-Фолс невдалеке от Кливленда, штат Огайо, отсутствие каких-либо значимых развлечений. Мужчина начал захаживать в местную закусочную, где подрабатывала официанткой 17-летняя Кара Вудс. Удивительным образом они подружились с 82-летним Биллом. Вместе с Parimatch рассказываем трогательную историю об одиночестве и щедрости.</p>
+                    </div>
+                </div>
+                <div class="block slds-medium-size_1-of-1 slds-large-size_5-of-12 slds-col slds-m-top_small slds-grid slds-grid_vertical-align-start slds-wrap">
+                    <div class="slds-size_1-of-1 slds-col slds-grid slds-m-top_small">
+                        <div class="slds-col slds-large-size_1-of-2 slds-medium-size_1-of-3 img-news">
+                            <img src="https://content.onliner.by/news/970x485/4bb0a66584532f50c01bbacb89cbfc44.jpeg"/>
+                        </div>
+                        <div class="news-heading slds-large-size_1-of-2 slds-medium-size_2-of-3 slds-col">
+                            <span><a href="#">Скоро может выйти новый альбом Оксимирона. Каким он будет?</a></span>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-col slds-grid slds-m-top_small">
+                        <div class="slds-col slds-large-size_1-of-2 slds-medium-size_1-of-3 img-news">
+                            <img src="https://content.onliner.by/news/970x485/e2690fef28e6f2fe3461cdea5ba703f1.jpeg"/>
+                        </div>
+                        <div class="news-heading slds-large-size_1-of-2 slds-medium-size_2-of-3 slds-col">
+                            <span><a href="#">Официальная статистика COVID-19: за сутки заразился 1981 человек. Последние две недели это число почти не меняется</a></span>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-col slds-grid slds-m-top_small">
+                        <div class="slds-col slds-large-size_1-of-2 slds-medium-size_1-of-3 img-news">
+                            <img src="https://content.onliner.by/news/970x485/518f09f46d907f5506f504eaa82f21ef.jpeg"/>
+                        </div>
+                        <div class="news-heading slds-large-size_1-of-2 slds-medium-size_2-of-3 slds-col">
+                            <span><a href="#">Новое задание для «Хороших белорусов»: расскажите о спасенных питомцах</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer slds-size_1-of-1 slds slds-col">
+
+            </div>
+        </div>
+    </div>
+</apex:page>
