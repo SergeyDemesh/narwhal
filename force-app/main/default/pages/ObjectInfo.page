@@ -1,0 +1,73 @@
+<apex:page id="ObjectInfo" controller="ObjectInfoController" showHeader="true" showChat="true">
+    <apex:slds />
+    <style>
+        .inputItems > * {
+            margin-right : 6px;
+            margin-bottom : 6px;
+            width: 250px !important;
+        }
+
+        .message {
+            width: 336px;
+            margin-left: 0 !important;
+        }
+
+        td {
+            min-width: 100px;
+        }
+    </style>
+    <apex:pageMessages id="message" />
+    <div class="slds-grid slds-wrap">
+        <apex:form>
+        <div class="inputItems slds-col slds-grid slds-grid_vertical-align-center">
+                <div class="slds-col slds-size_1-of-6">
+                    <apex:inputText value="{!objectName}" styleClass="slds-input"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-6">
+                    <apex:commandButton value="Get Info"  styleClass="slds-button_outline-brand" action="{!getObjectInfo}"/>
+                </div>
+        </div>
+        </apex:form>
+        <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+                <apex:pageBlock>
+                    <apex:form>
+                        <apex:pageBlockSection title="Object Permissions">
+                            <apex:outputText value="Read"/><apex:inputCheckbox disabled="true" value="{!canRead}"/>
+                            <apex:outputText value="Create"/><apex:inputCheckbox disabled="true" value="{!canCreate}"/>
+                            <apex:outputText value="Edit"/><apex:inputCheckbox disabled="true" value="{!canEdit}"/>
+                            <apex:outputText value="Delete"/><apex:inputCheckbox disabled="true" value="{!canDelete}"/>
+                        </apex:pageBlockSection>
+                    </apex:form>
+                </apex:pageBlock>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <apex:pageBlock>
+                    <apex:pageBlockSection title="Field-Level Security" columns="3">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Field</td>
+                                    <td>Read</td>
+                                    <td>Edit</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:form>
+                                    <apex:repeat value="{!fields}" var="field" id="table">
+                                            <tr>
+                                                <td><apex:outputText value="{!field.Name}"/></td>
+                                                <td><apex:inputCheckbox disabled="true" value="{!field.Read}"/> </td>
+                                                <td><apex:inputCheckbox disabled="true" value="{!field.Edit}"/> </td>
+                                            </tr>
+                                    </apex:repeat>
+                                </apex:form>
+                            </tbody>
+                         </table>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </div>
+        </div>
+    </div>
+</apex:page>
