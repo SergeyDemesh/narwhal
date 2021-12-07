@@ -1,10 +1,10 @@
 public with sharing class ObjectInfoController {
 
     public String objectName{get; set;}
-    public Boolean canRead{get;set;}
-    public Boolean canCreate{get;set;}
-    public Boolean canEdit{get;set;}
-    public Boolean canDelete{get;set;}
+    public Boolean canRead{get; set;}
+    public Boolean canCreate{get; set;}
+    public Boolean canEdit{get; set;}
+    public Boolean canDelete{get; set;}
     public List<WrappedFields> fields{get; set;}
 
 
@@ -15,18 +15,21 @@ public with sharing class ObjectInfoController {
         Map<String, SObjectType> objects = Schema.getGlobalDescribe();
 
         try {
+            System.debug(objectName);
             DescribeSObjectResult describe = objects.get(objectName).getDescribe();
             canRead = describe.isAccessible();
             canCreate = describe.isCreateable();
             canEdit = describe.isUpdateable();
             canDelete = describe.isDeletable();
+            fields = new List<ObjectInfoController.WrappedFields>();
+            for (SObjectField field :Schema.describeSObjects(objName)[0].fields.getMap().values()) {
+                fields.add(new WrappedFields(field));
+            }
         } catch (NullPointerException ex) {
-            throw new VisualforceException(ex.getMessage());
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.INFO, 'Object not found'));
+//            throw new VisualforceException(ex.getMessage());
         }
-        fields = new List<ObjectInfoController.WrappedFields>();
-        for (SObjectField field :Schema.describeSObjects(objName)[0].fields.getMap().values()) {
-            fields.add(new WrappedFields(field));
-        }
+
 
 
 

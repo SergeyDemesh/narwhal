@@ -1,14 +1,22 @@
 <apex:page id="CarNumberGenerator" controller="CarNumberGeneratorController">
+    <style>
+        .items > * {
+            margin: 5px !important;
+        }
+
+        .message {
+            width: 156px;
+            margin-left: 5px !important;
+        }
+    </style>
     <apex:slds />
-    <div class="slds-grid slds-wrap slds-gutters_medium">
-        <div class="slds-col slds-size_1-of-3">
-            <apex:form>
-                <apex:commandButton styleClass="slds-button_outline-brand" action="{!generateNumber}" value="Generate"> </apex:commandButton>
-                <apex:commandButton styleClass="slds-button_outline-brand" action="{!saveNumber}" value="Save"> </apex:commandButton><br/>
-
-                <apex:outputText id="number" value="{!carNumber}"> </apex:outputText>
-            </apex:form>
+    <apex:pageMessages id="message" />
+    <apex:form>
+        <div class="items">
+            <apex:commandButton styleClass="slds-button_outline-brand" action="{!generateNumber}" value="Generate"> </apex:commandButton>
+            <apex:commandButton styleClass="slds-button_outline-brand" action="{!saveNumber}" value="Save"> </apex:commandButton>
+            <apex:outputText id="number" value="{!carNumber}"> </apex:outputText>
         </div>
+    </apex:form>
 
-    </div>
 </apex:page>
