@@ -7,10 +7,12 @@ public with sharing class QueueableCreateContactSecond implements Queueable{
     public List<Contact> contacts;
 
     public void execute(QueueableContext context) {
-        for(Contact contact: contacts) {
+        for (Contact contact: contacts) {
             contact.LastName = 'SecondJob';
         }
         insert contacts;
+        AddTitleToContactBatch batch = new AddTitleToContactBatch();
+        System.scheduleBatch(batch, 'Schedule bath after 20 minutes', 20);
     }
 
 }

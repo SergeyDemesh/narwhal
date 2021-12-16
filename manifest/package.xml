@@ -24,5 +24,23 @@
         <members>*</members>
         <name>ApexComponent</name>
     </types>
+    <types>
+        <members>City.Borisov</members>
+        <members>City.Brest</members>
+        <members>City.Gomel</members>
+        <members>City.Gorki</members>
+        <members>City.Gorodok</members>
+        <members>City.Grodno</members>
+        <members>City.Kobrin</members>
+        <members>City.Minsk</members>
+        <members>City.Mogilev</members>
+        <members>City.Soligorsk</members>
+        <members>City.Vitebsk</members>
+        <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>unfiled$public/Email_For_Admin</members>
+        <name>EmailTemplate</name>
+    </types>
     <version>52.0</version>
 </Package>

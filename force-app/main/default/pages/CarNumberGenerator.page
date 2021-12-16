@@ -1,5 +1,9 @@
 <apex:page id="CarNumberGenerator" controller="CarNumberGeneratorController">
     <style>
+        .items {
+            margin: 15px;
+        }
+
         .items > * {
             margin: 5px !important;
         }
@@ -8,15 +12,79 @@
             width: 156px;
             margin-left: 5px !important;
         }
+
+        .table-fill {
+            border-radius:3px;
+            height: 230px;
+            margin: 15px;
+            max-width: 360px;
+            padding:5px;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            color:#D5DDE5;;
+            background:#1b1e24;
+            border: 2px solid #343a45;
+            font-size:16px;
+            font-weight: 100;
+            padding:14px;
+            text-align:left;
+            vertical-align:middle;
+        }
+
+        tr {
+            border: 1px solid #C1C3D1;
+            color:#666B85;
+            font-size:16px;
+            font-weight:normal;
+        }
+
+        td {
+            padding: 10px !important;
+            text-align:left;
+            vertical-align:middle;
+            font-weight:300;
+            font-size:16px;
+            border: 3px solid #C1C3D1;
+        }
+
+        th.text-left {
+            text-align: left;
+        }
+
+        td.text-left {
+            text-align: left;
+        }
+
     </style>
     <apex:slds />
     <apex:pageMessages id="message" />
-    <apex:form>
+    <apex:form >
         <div class="items">
-            <apex:commandButton styleClass="slds-button_outline-brand" action="{!generateNumber}" value="Generate"> </apex:commandButton>
+            <apex:commandButton styleClass="slds-button_outline-brand" action="{!generateAllNumber}" value="Generate for all Users"> </apex:commandButton>
+            <apex:commandButton styleClass="slds-button_outline-brand" action="{!generateNumberForMe}" value="Generate"> </apex:commandButton>
             <apex:commandButton styleClass="slds-button_outline-brand" action="{!saveNumber}" value="Save"> </apex:commandButton>
             <apex:outputText id="number" value="{!carNumber}"> </apex:outputText>
         </div>
+        <table class="table-fill">
+            <thead>
+            <tr>
+                <th class="text-left">Name</th>
+                <th class="text-left">Car number</th>
+            </tr>
+            </thead>
+            <tbody class="table-hover">
+            <apex:repeat value="{!changedUsers}" var="user">
+                <tr>
+                    <td class="text-left"><apex:outputText value="{!user.Name}"/></td>
+                    <td class="text-left"><apex:outputText value="{!user.triplk__Car_Number__c}"/></td>
+                </tr>
+            </apex:repeat>
+
+            </tbody>
+        </table>
     </apex:form>
 
 </apex:page>

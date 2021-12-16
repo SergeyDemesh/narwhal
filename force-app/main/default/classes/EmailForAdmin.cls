@@ -1,29 +1,23 @@
-public with sharing class EmailForAdmin {
+public with sharing class EmailForAdmin implements Schedulable{
 
-    public static void sendEmailForAdmin() {
+    public static void execute(SchedulableContext ctx) {
         Messaging.reserveSingleEmailCapacity(1);
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        List<Contact> newContacts = [
-                SELECT Id, Name
-                FROM Contact
-                WHERE CreatedDate = TODAY
+        User admin = [
+                SELECT Id, Email
+                FROM User
+                WHERE Profile.Name = 'System Administrator'
         ];
-        List<Account> newAccount = [
-                SELECT Id, Name
-                FROM Account
-                WHERE CreatedDate = TODAY
-        ];
-        List<Case> newCases = [
+        EmailTemplate temp = [
                 SELECT Id
-                FROM Case
-                WHERE CreatedDate = TODAY
+                FROM EmailTemplate
+                WHERE DeveloperName = 'Email_For_Admin'
         ];
-        String body = 'New Contacts : ' + newContacts.toString() + '\n' +
-                'New Accounts : ' + newAccount + '\n' +
-                'New Cases : ' + newCases;
+
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        mail.setPlainTextBody(body);
-        mail.setToAddresses(new List<String>{'sergey,demesh98@gmail.com'});
+        mail.setTemplateId(temp.Id);
+        mail.setTargetObjectId(admin.Id);
+        mail.setSaveAsActivity(false);
         mails.add(mail);
 
         Messaging.sendEmail(mails);
