@@ -1,0 +1,135 @@
+.exchangeRates, .converter, .anyToAny{
+    background-color: white;
+    border-radius: 3px;
+    min-width: 300px;
+    max-width: 360px;
+    min-height: 120px;
+    max-height: 50vh;
+    float: left;
+    margin-right: 10px;
+}
+
+.input {
+    margin: 10px;
+}
+
+.currency {
+    width: 95%;
+    margin: 10px;
+}
+
+.currency thead th {
+    color:#D5DDE5;;
+    background:#1b1e24;
+    border-bottom:4px solid #9ea7af;
+    border-right: 1px solid #343a45;
+    font-size:16px;
+    font-weight: 100;
+    padding:10px;
+    text-align:left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    vertical-align:middle;
+}
+
+.currency thead th:first-child {
+    border-top-left-radius:3px;
+}
+
+.currency thead th:last-child {
+    border-top-right-radius:3px;
+    border-right:none;
+}
+
+.currency tbody {
+    display: block;
+    position:relative;
+    width:100%;
+    max-height: 32vh;
+    overflow-y:scroll;
+}
+
+tr {
+    width: 100%;
+    display:flex;
+    border-top: 1px solid #C1C3D1;
+    border-bottom: 1px solid #C1C3D1;
+    color:#666B85;
+    font-size:16px;
+    font-weight:normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:first-child {
+    border-top:none;
+}
+
+tr:last-child {
+    border-bottom:none;
+}
+
+tr:nth-child(odd) td {
+    background:#EBEBEB;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius:3px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius:3px;
+}
+
+td {
+    background:#FFFFFF;
+    padding:10px;
+    text-align:left;
+    vertical-align:middle;
+    font-weight:300;
+    font-size:16px;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+    border-right: 0;
+}
+
+.currency td, .currency th {
+    flex-basis:100%;
+    flex-grow:2;
+    display: block;
+}
+
+.currencyCombobox {
+    width: 44%;
+    float: left;
+    left: 10px;
+}
+
+.convertButton {
+    position: relative;
+    left: 30px;
+    top: 24px;
+}
+
+.converter .input {
+    width: 44%;
+}
+
+.inputConverter {
+    width: 44%;
+    display: inline-block;
+    margin: 10px;
+}
+
+.inputs {
+    border: none;
+    padding: 10px 0;
+    position: relative;
+    clear: both;
+}
+
+.anyToAny .currencyCombobox {
+    left: 0;
+    margin-left: 14px;
+}

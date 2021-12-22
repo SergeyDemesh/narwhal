@@ -1,0 +1,113 @@
+<template>
+    <div if:false={isLoaded} >
+        <lightning-spinner alternative-text='Loading...'>
+        </lightning-spinner>
+    </div>
+    <div>
+        <div class='exchangeRates'>
+            <lightning-input class='input'
+                             id="dateInput"
+                             type=date
+                             label='Date'
+                             value='{dateRate}'
+                             onchange='{handleDateChange}'
+            >
+            </lightning-input>
+
+            <table class='currency'>
+                <thead>
+                    <tr>
+                        <th>Currency</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={exchangeRates} for:item='rate'>
+                        <tr key={rate}>
+                            <td>{rate.label} {rate.scale}</td>
+                            <td>{rate.value}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <div class='converter'>
+            <lightning-combobox class='currencyCombobox'
+                                id='combobox'
+                                label='Currency'
+                                value={currencyRate}
+                                options={exchangeRates}
+                                onchange={handleCurrencyChange}
+            >
+            </lightning-combobox>
+
+            <lightning-button class='convertButton' label='Convert' onclick={convertCurrency}></lightning-button>
+
+            <div class='inputs'>
+            <lightning-input class='inputConverter'
+                             id='currencyInput'
+                             type='number'
+                             title='Foreign'
+                             value={currencyValue}
+                             label={currencyName}
+                             formatter='decimal'
+                             step='0.01'
+                             disabled={disableInputForeign}
+                             onchange={handleCurrencyValueChange}
+            >
+            </lightning-input>
+            <lightning-input class='inputConverter'
+                             id='currencyOutput'
+                             type='number'
+                             value={belRubValue}
+                             label='BLR'
+                             formatter='decimal'
+                             step='0.01'
+                             disabled='true'
+            >
+            </lightning-input>
+            </div>
+        </div>
+
+        <div class='anyToAny'>
+            <lightning-combobox class='currencyCombobox'
+                                label='From'
+                                value={currencyRateFrom}
+                                options={exchangeRates}
+                                onchange={handleCurrencyChange}
+            >
+            </lightning-combobox>
+
+            <lightning-combobox class='currencyCombobox'
+                                label='To'
+                                value={currencyRateTo}
+                                options={exchangeRates}
+                                onchange={handleCurrencyChange}
+            >
+            </lightning-combobox>
+            <lightning-input class='inputConverter'
+                             type='number'
+                             title='From'
+                             value={currencyValueFrom}
+                             label={currencyNameFrom}
+                             formatter='decimal'
+                             step='0.01'
+                             disabled={disableInputsAnyToAny}
+                             onchange={handleCurrencyValueChange}
+            >
+            </lightning-input>
+            <lightning-input class='inputConverter'
+                             type='number'
+                             title='To'
+                             value={currencyValueTo}
+                             label={currencyNameTo}
+                             formatter='decimal'
+                             step='0.01'
+                             disabled={disableInputsAnyToAny}
+                             onchange={handleCurrencyValueChange}
+            >
+            </lightning-input>
+        </div>
+    </div>
+</template>
